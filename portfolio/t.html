@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My e-Portfolio | Web Dev</title>
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Supabase JS Client (Database Integration) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- Razorpay Checkout Script (Payment Gateway) -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+
+  <!-- Navbar -->
+  <header class="bg-white shadow-sm sticky top-0 z-40">
+    <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="#" class="text-xl font-bold text-indigo-600">Shraddha.</a>
+      <nav class="space-x-6 text-sm font-medium text-slate-600 hidden sm:block">
+        <a href="#projects" class="hover:text-indigo-600">Projects</a>
+        <a href="#services" class="hover:text-indigo-600">Services & Pay</a>
+        <a href="#contact" class="hover:text-indigo-600">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 1. Hero Section (AI Builder Layout) -->
+  <section class="max-w-5xl mx-auto px-6 py-20 text-center">
+    <span class="inline-block bg-indigo-100 text-indigo-700 text-xs font-semibold px-3 py-1 rounded-full mb-4">
+      Full-Stack Web Developer
+    </span>
+    <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
+      Building Smart Web Apps & AI Integrations
+    </h1>
+    <p class="text-lg text-slate-600 max-w-2xl mx-auto mb-8">
+      Hi, I am Shraddha. I build responsive web applications powered by cloud databases, secure payment gateways, WhatsApp automation, and AI assistants.
+    </p>
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href="#contact" class="bg-indigo-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-indigo-700 transition">
+        Get in Touch
+      </a>
+      <!-- 4. WhatsApp API Click-to-Chat -->
+      <a href="https://wa.me/919876543210?text=Hi%20Ridhi%2C%20I%20visited%20your%20e-Portfolio%20and%20would%20like%20to%20connect."
+         target="_blank"
+         class="bg-emerald-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-emerald-700 transition">
+        Chat on WhatsApp
+      </a>
+      <button onclick="toggleChat()"
+              class="bg-slate-900 text-white px-6 py-3 rounded-lg font-medium hover:bg-slate-800 transition">
+        Ask AI Chatbot
+      </button>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="max-w-5xl mx-auto px-6 py-12">
+    <h2 class="text-2xl font-bold text-slate-900 mb-6">Featured Projects</h2>
+    <div id="project-grid" class="grid md:grid-cols-3 gap-6">
+      <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+        <h3 class="font-bold text-lg mb-2">AI Resume Screener</h3>
+        <p class="text-sm text-slate-600 mb-4">Automated candidate ranking tool built using modern AI builders and LLM APIs.</p>
+        <span class="text-xs font-medium text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded">AI Builder + API</span>
+      </div>
+      <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+        <h3 class="font-bold text-lg mb-2">SaaS Subscription Portal</h3>
+        <p class="text-sm text-slate-600 mb-4">Full-stack dashboard with user authentication, PostgreSQL database, and UPI billing.</p>
+        <span class="text-xs font-medium text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded">Supabase + Razorpay</span>
+      </div>
+      <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+        <h3 class="font-bold text-lg mb-2">WhatsApp Order Bot</h3>
+        <p class="text-sm text-slate-600 mb-4">Automated order confirmations and customer support using WhatsApp Cloud API.</p>
+        <span class="text-xs font-medium text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded">WhatsApp Cloud API</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Payment Gateway Section -->
+  <section id="services" class="max-w-5xl mx-auto px-6 py-12">
+    <h2 class="text-2xl font-bold text-slate-900 mb-6">Services & Instant Booking</h2>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 flex flex-col justify-between">
+        <div>
+          <h3 class="font-bold text-lg">1-on-1 Tech Consultation (30 Mins)</h3>
+          <p class="text-sm text-slate-600 mt-2">Get architecture advice, code review, or AI integration guidance for your project.</p>
+        </div>
+        <div class="mt-6 flex items-center justify-between">
+          <span class="text-2xl font-bold text-slate-900">₹499</span>
+          <button onclick="initiatePayment(499, 'Tech Consultation')"
+                  class="bg-indigo-600 text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-indigo-700 transition">
+            Book & Pay Now
+          </button>
+        </div>
+      </div>
+
+      <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 flex flex-col justify-between">
+        <div>
+          <h3 class="font-bold text-lg">Landing Page Starter Package</h3>
+          <p class="text-sm text-slate-600 mt-2">Custom responsive website with contact form database and WhatsApp integration.</p>
+        </div>
+        <div class="mt-6 flex items-center justify-between">
+          <span class="text-2xl font-bold text-slate-900">₹4,999</span>
+          <button onclick="initiatePayment(4999, 'Landing Page Package')"
+                  class="bg-indigo-600 text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-indigo-700 transition">
+            Pay Advance
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Database Integration (Contact Form) -->
+  <section id="contact" class="max-w-5xl mx-auto px-6 py-12 mb-16">
+    <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-100 max-w-xl mx-auto">
+      <h2 class="text-2xl font-bold text-slate-900 mb-2">Send a Message</h2>
+      <p class="text-sm text-slate-500 mb-6">Submissions are saved directly to the cloud database.</p>
+
+      <form id="contact-form" class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1">Full Name</label>
+          <input type="text" id="name" required placeholder="Vallabha Acharya"
+                 class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1">Email Address</label>
+          <input type="email" id="email" required placeholder="Vallabha@example.com"
+                 class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1">Project Details</label>
+          <textarea id="message" rows="3" required placeholder="Tell me about your project..."
+                    class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"></textarea>
+        </div>
+        <button type="submit"
+                class="w-full bg-slate-900 text-white py-2.5 rounded-lg font-medium hover:bg-slate-800 transition">
+          Submit Inquiry
+        </button>
+      </form>
+      <p id="form-status" class="text-sm mt-4 text-center font-medium hidden"></p>
+    </div>
+  </section>
+
+  <!-- 5. Floating AI Chatbot Widget -->
+  <div class="fixed bottom-5 right-5 z-50">
+    <!-- Chat Window -->
+    <div id="chat-window" class="hidden bg-white w-80 sm:w-96 rounded-2xl shadow-2xl border border-slate-200 overflow-hidden mb-3">
+      <div class="bg-indigo-600 text-white px-4 py-3 flex justify-between items-center">
+        <div>
+          <span class="font-semibold text-sm block">Portfolio AI Assistant</span>
+          <span class="text-[11px] text-indigo-200">Online • Ask about skills, projects, or pricing</span>
+        </div>
+        <button onclick="toggleChat()" class="text-white/80 hover:text-white text-xl leading-none px-1">×</button>
+      </div>
+
+      <!-- Quick Suggestion Chips -->
+      <div class="bg-slate-100 px-3 py-2 flex gap-1.5 overflow-x-auto border-b border-slate-200 text-xs">
+        <button type="button" onclick="sendQuickPrompt('What are your main tech skills?')" class="bg-white border border-slate-300 px-2.5 py-1 rounded-full hover:bg-indigo-50 whitespace-nowrap">Skills</button>
+        <button type="button" onclick="sendQuickPrompt('Tell me about your projects')" class="bg-white border border-slate-300 px-2.5 py-1 rounded-full hover:bg-indigo-50 whitespace-nowrap">Projects</button>
+        <button type="button" onclick="sendQuickPrompt('What are your service charges?')" class="bg-white border border-slate-300 px-2.5 py-1 rounded-full hover:bg-indigo-50 whitespace-nowrap">Pricing</button>
+      </div>
+
+      <div id="chat-messages" class="p-4 h-64 overflow-y-auto space-y-3 text-sm bg-slate-50">
+        <div class="bg-white p-3 rounded-lg shadow-sm border border-slate-100 text-slate-700">
+          Hi! I'm Rahul's AI Assistant. Ask me anything about my skills, projects, pricing, or how to get in touch!
+        </div>
+      </div>
+
+      <form id="chat-form" class="p-2 border-t border-slate-200 bg-white flex gap-2">
+        <input type="text" id="chat-input" placeholder="Type your question..." required
+               class="flex-1 text-sm px-3 py-2 border border-slate-300 rounded-lg outline-none focus:border-indigo-500" />
+        <button type="submit" class="bg-indigo-600 text-white px-3.5 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700">
+          Send
+        </button>
+      </form>
+    </div>
+
+    <!-- Floating Toggle Button -->
+    <button onclick="toggleChat()"
+            class="ml-auto flex items-center gap-2 bg-indigo-600 text-white px-4 py-3 rounded-full shadow-lg hover:bg-indigo-700 transition font-medium text-sm">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+      </svg>
+      <span>Ask AI</span>
+    </button>
+  </div>
+
+  <!-- All JavaScript Integrations -->
+  <script>
+    // ==========================================
+    // 2. DATABASE INTEGRATION (SUPABASE)
+    // ==========================================
+    const SUPABASE_URL = 'https://YOUR_PROJECT_ID.supabase.co';
+    const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+    const isSupabaseConfigured = !SUPABASE_URL.includes('YOUR_PROJECT_ID');
+    const supabaseClient = isSupabaseConfigured ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+
+    document.getElementById('contact-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const statusEl = document.getElementById('form-status');
+      const payload = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        message: document.getElementById('message').value
+      };
+
+      statusEl.classList.remove('hidden', 'text-emerald-600', 'text-amber-600', 'text-red-600');
+
+      if (supabaseClient) {
+        const { error } = await supabaseClient.from('messages').insert([payload]);
+        if (error) {
+          statusEl.textContent = 'Database error: ' + error.message;
+          statusEl.classList.add('text-red-600');
+          return;
+        }
+        statusEl.textContent = 'Saved to Supabase database successfully!';
+        statusEl.classList.add('text-emerald-600');
+      } else {
+        console.log('Form Payload (Ready for Supabase):', payload);
+        statusEl.textContent = 'Demo mode: Form captured! Add your Supabase keys in the script to save to cloud DB.';
+        statusEl.classList.add('text-amber-600');
+      }
+      e.target.reset();
+    });
+
+    // ==========================================
+    // 3. PAYMENT GATEWAY (RAZORPAY)
+    // ==========================================
+    function initiatePayment(amountInINR, serviceName) {
+      const RAZORPAY_KEY_ID = 'rzp_test_YOUR_KEY_ID';
+
+      if (RAZORPAY_KEY_ID.includes('YOUR_KEY_ID')) {
+        alert(`Demo Payment Triggered:\nService: ${serviceName}\nAmount: ₹${amountInINR}\n\nReplace RAZORPAY_KEY_ID in the code with your Razorpay Test Key to open the live UPI/Card checkout modal.`);
+        return;
+      }
+
+      const options = {
+        key: RAZORPAY_KEY_ID,
+        amount: amountInINR * 100,
+        currency: 'INR',
+        name: 'DevPortfolio Services',
+        description: serviceName,
+        handler: function (response) {
+          alert('Payment Successful! Payment ID: ' + response.razorpay_payment_id);
+        },
+        theme: { color: '#4f46e5' }
+      };
+      const rzp = new Razorpay(options);
+      rzp.open();
+    }
+
+    // ==========================================
+    // 4. WHATSAPP CLOUD API HELPER
+    // ==========================================
+    async function triggerWhatsAppCloudAPI(recipientPhone, templateName = 'hello_world') {
+      const PHONE_NUMBER_ID = 'YOUR_PHONE_NUMBER_ID';
+      const ACCESS_TOKEN = 'YOUR_TEMP_ACCESS_TOKEN';
+
+      await fetch(`https://graph.facebook.com/v20.0/${PHONE_NUMBER_ID}/messages`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${ACCESS_TOKEN}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          messaging_product: 'whatsapp',
+          to: recipientPhone,
+          type: 'template',
+          template: { name: templateName, language: { code: 'en_US' } }
+        })
+      });
+    }
+
+    // ==========================================
+    // 5. AI CHATBOT (GEMINI API + BUILT-IN FALLBACK)
+    // ==========================================
+    const GEMINI_API_KEY = 'YOUR_GEMINI_API_KEY'; // Optional: Paste free key from aistudio.google.com for full LLM answers
+
+    const PORTFOLIO_CONTEXT = `
+      You are an AI assistant on Rahul's developer e-Portfolio. Answer visitor questions concisely, warmly, and professionally in under 3 sentences.
+      - Name: Rahul | Role: Full-Stack Web Developer
+      - Skills: HTML, Tailwind CSS, JavaScript, React, Supabase, Firebase, Razorpay Payment Gateway, WhatsApp Cloud API.
+      - Projects: 1) AI Resume Screener (LLM APIs), 2) SaaS Subscription Portal (Supabase + Razorpay UPI), 3) WhatsApp Order Bot (WhatsApp Cloud API).
+      - Pricing: 30-min Tech Consultation is ₹499; Landing Page Starter Package is ₹4,999.
+      - Contact: Contact form on this page or the 'Chat on WhatsApp' button.
+    `;
+
+    function toggleChat() {
+      document.getElementById('chat-window').classList.toggle('hidden');
+    }
+
+    function sendQuickPrompt(text) {
+      document.getElementById('chat-input').value = text;
+      document.getElementById('chat-form').dispatchEvent(new Event('submit'));
+    }
+
+    function getFallbackReply(query) {
+      const q = query.toLowerCase();
+      if (q.includes('skill') || q.includes('stack') || q.includes('tech') || q.includes('know')) {
+        return "I specialize in HTML, Tailwind CSS, JavaScript, React, Supabase/Firebase databases, Razorpay payment gateways, and WhatsApp Cloud APIs.";
+      }
+      if (q.includes('project') || q.includes('work') || q.includes('built') || q.includes('portfolio')) {
+        return "My key projects include an AI Resume Screener, a SaaS Subscription Portal with Supabase & Razorpay UPI, and an automated WhatsApp Order Bot.";
+      }
+      if (q.includes('price') || q.includes('cost') || q.includes('charge') || q.includes('rate') || q.includes('fee')) {
+        return "A 30-minute Tech Consultation is ₹499, and the Landing Page Starter Package is ₹4,999. You can book directly in the Services section!";
+      }
+      if (q.includes('hire') || q.includes('contact') || q.includes('whatsapp') || q.includes('email') || q.includes('reach')) {
+        return "You can click the green 'Chat on WhatsApp' button at the top or fill out the contact form below to send a message directly to my database.";
+      }
+      return "I'm Rahul's portfolio assistant! Ask me about my tech skills, featured projects, service pricing, or how to get in touch.";
+    }
+
+    document.getElementById('chat-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const input = document.getElementById('chat-input');
+      const userText = input.value.trim();
+      if (!userText) return;
+
+      appendMessage(userText, 'user');
+      input.value = '';
+      const typingId = appendMessage('Typing...', 'bot');
+
+      // Use live Gemini API if key is configured; otherwise use instant built-in responses
+      if (GEMINI_API_KEY.includes('YOUR_GEMINI_API_KEY')) {
+        setTimeout(() => updateMessage(typingId, getFallbackReply(userText)), 350);
+        return;
+      }
+
+      try {
+        const response = await fetch(
+          `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              systemInstruction: { parts: [{ text: PORTFOLIO_CONTEXT }] },
+              contents: [{ role: 'user', parts: [{ text: userText }] }]
+            })
+          }
+        );
+        const data = await response.json();
+        const aiReply = data?.candidates?.[0]?.content?.parts?.[0]?.text || getFallbackReply(userText);
+        updateMessage(typingId, aiReply);
+      } catch (err) {
+        updateMessage(typingId, getFallbackReply(userText));
+      }
+    });
+
+    function appendMessage(text, sender) {
+      const box = document.getElementById('chat-messages');
+      const div = document.createElement('div');
+      const msgId = 'msg-' + Date.now() + Math.random().toString(36).slice(2, 6);
+      div.id = msgId;
+      div.className = sender === 'user'
+        ? 'bg-indigo-600 text-white p-3 rounded-lg ml-8'
+        : 'bg-white text-slate-700 p-3 rounded-lg shadow-sm border border-slate-100 mr-8';
+      div.textContent = text;
+      box.appendChild(div);
+      box.scrollTop = box.scrollHeight;
+      return msgId;
+    }
+
+    function updateMessage(id, newText) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.textContent = newText;
+        const box = document.getElementById('chat-messages');
+        box.scrollTop = box.scrollHeight;
+      }
+    }
+  </script>
+</body>
+</html>
